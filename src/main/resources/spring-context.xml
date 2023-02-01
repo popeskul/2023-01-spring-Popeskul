@@ -4,12 +4,7 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
     <context:property-placeholder location="classpath:application.properties"/>
 
-    <bean id="csvParseService" class="com.otus.homework.service.CsvParseService">
+    <bean id="csvParseService" class="com.otus.homework.service.QuestionDao">
         <constructor-arg value="${questions_answers_csv}"/>
-        <constructor-arg ref="questionService"/>
-        <constructor-arg ref="answerService"/>
     </bean>
-
-    <bean id="questionService" class="com.otus.homework.service.QuestionService"/>
-    <bean id="answerService" class="com.otus.homework.service.AnswerService"/>
 </beans>
