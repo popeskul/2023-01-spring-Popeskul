@@ -6,10 +6,12 @@ import java.util.List;
 public class Question {
     private String text;
     private List<Answer> answers;
+    private int correctAnswerIndex;
 
-    public Question(String question, List<Answer> answers) {
+    public Question(String question, List<Answer> answers, int correctAnswerIndex) {
         this.text = question;
         this.answers = answers;
+        this.correctAnswerIndex = correctAnswerIndex;
     }
 
     public String getText() {
@@ -28,11 +30,16 @@ public class Question {
         this.answers = answers;
     }
 
+    public int getCorrectAnswerIndex() {
+        return correctAnswerIndex;
+    }
+
     @Override
     public String toString() {
         return "Question{" +
                 "text='" + text + '\'' +
                 ", answers=" + answers +
+                ", correctAnswerIndex=" + correctAnswerIndex +
                 '}';
     }
 }
