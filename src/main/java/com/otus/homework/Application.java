@@ -1,6 +1,6 @@
 package com.otus.homework;
 
-import com.otus.homework.service.QuizService;
+import com.otus.homework.service.QuizServiceImpl;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class Application {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Application.class);
-        QuizService quizService = context.getBean(QuizService.class);
+        QuizServiceImpl quizService = context.getBean(QuizServiceImpl.class);
         quizService.startQuiz();
     }
 }

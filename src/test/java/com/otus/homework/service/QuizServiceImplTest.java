@@ -14,8 +14,8 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class QuizServiceTest {
-    private QuizService quizService;
+class QuizServiceImplTest {
+    private QuizServiceImpl quizService;
     private ScannerWrapper scanner;
 
     @BeforeEach
@@ -33,7 +33,10 @@ class QuizServiceTest {
         List<Question> expectedQuestions = new ArrayList<>();
         expectedQuestions.add(question);
 
-        quizService = new QuizService(expectedQuestions, scanner);
+        QuestionDaoLoader questionDaoLoader = mock(QuestionDaoLoader.class);
+        when(questionDaoLoader.load()).thenReturn(expectedQuestions);
+
+        quizService = new QuizServiceImpl(questionDaoLoader, scanner);
     }
 
     @Test

@@ -6,7 +6,7 @@ import java.util.List;
 public class Question {
     private String text;
     private List<Answer> answers;
-    private int correctAnswerIndex;
+    private final int correctAnswerIndex;
 
     public Question(String question, List<Answer> answers, int correctAnswerIndex) {
         this.text = question;
