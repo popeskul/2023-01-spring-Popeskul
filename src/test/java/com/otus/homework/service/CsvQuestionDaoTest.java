@@ -26,7 +26,8 @@ public class CsvQuestionDaoTest {
         List<Answer> answers = new ArrayList<>();
         answers.add(new Answer("Answer1"));
         answers.add(new Answer("Answer2"));
-        Question question = new Question("Question 1?", answers);
+        int correctAnswerIndex = 1;
+        Question question = new Question("Question 1?", answers, correctAnswerIndex);
         List<Question> expectedQuestions = new ArrayList<>();
         expectedQuestions.add(question);
 
@@ -39,5 +40,7 @@ public class CsvQuestionDaoTest {
         for (int i = 0; i < expectedQuestions.get(0).getAnswers().size(); i++) {
             assertEquals(expectedQuestions.get(0).getAnswers().get(i).getText(), actualQuestions.get(0).getAnswers().get(i).getText());
         }
+
+        assertEquals(expectedQuestions.get(0).getCorrectAnswerIndex(), actualQuestions.get(0).getCorrectAnswerIndex());
     }
 }
