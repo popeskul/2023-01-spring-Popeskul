@@ -1,6 +1,6 @@
 package com.otus.homework.service;
 
-import com.otus.homework.config.AppProps;
+import com.otus.homework.config.LocaleHolder;
 import com.otus.homework.domain.Answer;
 import com.otus.homework.domain.Question;
 import com.otus.homework.utils.FileResourcesUtils;
@@ -18,19 +18,19 @@ import java.util.stream.Collectors;
 public class QuestionDao implements Parser {
     private final String fileName;
     private final MessageSource messageSource;
-    private final AppProps props;
+    private final LocaleHolder localeHolder;
 
-    public QuestionDao(MessageSource messageSource, AppProps props, String fileName) {
+    public QuestionDao(MessageSource messageSource, LocaleHolder localeHolder, String fileName) {
         this.fileName = fileName;
         this.messageSource = messageSource;
-        this.props = props;
+        this.localeHolder = localeHolder;
     }
 
     public List<Question> parse() {
         List<Question> questions = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                new FileResourcesUtils(messageSource, props).getFileFromResourceAsStream(fileName), StandardCharsets.UTF_8)
+                new FileResourcesUtils(messageSource, localeHolder).getFileFromResourceAsStream(fileName), StandardCharsets.UTF_8)
         )) {
             br.readLine();
 
@@ -49,7 +49,7 @@ public class QuestionDao implements Parser {
                 questions.add(new Question(question, answers, correctAnswerIndex));
             }
         } catch (IOException e) {
-            throw new RuntimeException(messageSource.getMessage("error.csv.parse.failed", null, props.getLocale()));
+            throw new RuntimeException(messageSource.getMessage("error.csv.parse.failed", null, localeHolder.getLocale()));
         }
 
         return questions;

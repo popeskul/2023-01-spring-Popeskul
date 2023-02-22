@@ -1,6 +1,7 @@
 package com.otus.homework.service;
 
 import com.otus.homework.config.AppProps;
+import com.otus.homework.config.LocaleHolder;
 import com.otus.homework.domain.Answer;
 import com.otus.homework.domain.Question;
 import com.otus.homework.utils.ScannerWrapper;
@@ -20,7 +21,7 @@ class QuizServiceImplTest {
     private QuizServiceImpl quizService;
     private ScannerWrapper scanner;
     private final MessageSource messageSource = mock(MessageSource.class);
-    private final AppProps props = mock(AppProps.class);
+    private final LocaleHolder localeHolder = mock(AppProps.class);
 
     @BeforeEach
     void setUp() {
@@ -40,7 +41,7 @@ class QuizServiceImplTest {
         QuestionDaoLoader questionDaoLoader = mock(QuestionDaoLoader.class);
         when(questionDaoLoader.load()).thenReturn(expectedQuestions);
 
-        quizService = new QuizServiceImpl(messageSource, props, questionDaoLoader, scanner);
+        quizService = new QuizServiceImpl(messageSource, localeHolder, questionDaoLoader, scanner);
     }
 
     @Test

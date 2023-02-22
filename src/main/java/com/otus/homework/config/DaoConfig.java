@@ -9,19 +9,20 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @PropertySource("classpath:application.yml")
 public class DaoConfig {
-    private final AppProps props;
+    private final CsvHolder csvHolder;
 
-    public DaoConfig(AppProps props) {
-        this.props = props;
+    public DaoConfig(CsvHolder csvHolder) {
+        this.csvHolder = csvHolder;
     }
 
     @Bean
-    public String fileName() {
-        return props.getCsv().get(props.getLocaleString());
+    public QuestionDao questionDao(MessageSource messageSource, LocaleHolder localeHolder, CsvFileNameProvider csvFileNameProvider) {
+        String fileName = csvFileNameProvider.getFileName(localeHolder.getLocaleString());
+        return new QuestionDao(messageSource, localeHolder, fileName);
     }
 
     @Bean
-    public QuestionDao questionDao(MessageSource messageSource, AppProps props) {
-        return new QuestionDao(messageSource, props, fileName());
+    public CsvFileNameProvider csvFileNameProvider() {
+        return new CsvFileNameProviderImpl(csvHolder);
     }
 }

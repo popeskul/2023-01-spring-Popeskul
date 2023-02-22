@@ -1,6 +1,7 @@
 package com.otus.homework.service;
 
 import com.otus.homework.config.AppProps;
+import com.otus.homework.config.LocaleHolder;
 import com.otus.homework.domain.Answer;
 import com.otus.homework.domain.Question;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,11 +20,11 @@ import static org.mockito.Mockito.mock;
 public class CsvQuestionDaoTest {
     private QuestionDao csvQuestionDao;
     private final MessageSource messageSource = mock(MessageSource.class);
-    private final AppProps props = mock(AppProps.class);
+    private final LocaleHolder localeHolder = mock(AppProps.class);
 
     @BeforeEach
     public void setup() {
-        csvQuestionDao = new QuestionDao(messageSource, props, "questions_answers_test.csv");
+        csvQuestionDao = new QuestionDao(messageSource, localeHolder, "questions_answers_test.csv");
     }
 
     @Test
