@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 public class QuestionDao implements Parser {
     private final String fileName;
-    private final String ERROR_MESSAGE_FILED_PARSE = "Failed to parse CSV file";
     private final MessageSource messageSource;
     private final AppProps props;
 
@@ -50,7 +49,7 @@ public class QuestionDao implements Parser {
                 questions.add(new Question(question, answers, correctAnswerIndex));
             }
         } catch (IOException e) {
-            throw new RuntimeException(ERROR_MESSAGE_FILED_PARSE, e);
+            throw new RuntimeException(messageSource.getMessage("error.csv.parse.failed", null, props.getLocale()));
         }
 
         return questions;

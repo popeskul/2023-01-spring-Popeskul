@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.Map;
 
 @ConfigurationProperties(prefix = "application")
-public class AppProps {
+public class AppProps implements LocaleHolder, CsvHolder {
     private Locale locale;
     private Map<String, String> csv;
 
