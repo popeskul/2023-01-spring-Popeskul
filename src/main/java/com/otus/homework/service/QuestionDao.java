@@ -5,6 +5,7 @@ import com.otus.homework.domain.Answer;
 import com.otus.homework.domain.Question;
 import com.otus.homework.utils.FileResourcesUtils;
 import org.springframework.context.MessageSource;
+import org.springframework.core.io.Resource;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,12 +17,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class QuestionDao implements Parser {
-    private final String fileName;
+    private final Resource resource;
     private final MessageSource messageSource;
     private final LocaleHolder localeHolder;
 
-    public QuestionDao(MessageSource messageSource, LocaleHolder localeHolder, String fileName) {
-        this.fileName = fileName;
+    public QuestionDao(MessageSource messageSource, LocaleHolder localeHolder, Resource resource) {
+        this.resource = resource;
         this.messageSource = messageSource;
         this.localeHolder = localeHolder;
     }
@@ -30,7 +31,7 @@ public class QuestionDao implements Parser {
         List<Question> questions = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                new FileResourcesUtils(messageSource, localeHolder).getFileFromResourceAsStream(fileName), StandardCharsets.UTF_8)
+                new FileResourcesUtils(messageSource, localeHolder).getFileFromResourceAsStream(resource.getFilename()), StandardCharsets.UTF_8)
         )) {
             br.readLine();
 

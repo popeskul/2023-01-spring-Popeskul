@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.context.MessageSource;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +23,11 @@ public class CsvQuestionDaoTest {
     private QuestionDao csvQuestionDao;
     private final MessageSource messageSource = mock(MessageSource.class);
     private final LocaleHolder localeHolder = mock(AppProps.class);
+    private final Resource resource = new ClassPathResource("questions_answers_test.csv");
 
     @BeforeEach
     public void setup() {
-        csvQuestionDao = new QuestionDao(messageSource, localeHolder, "questions_answers_test.csv");
+        csvQuestionDao = new QuestionDao(messageSource, localeHolder, resource);
     }
 
     @Test
