@@ -1,0 +1,12 @@
+spring:
+  output:
+    ansi:
+      enabled: always
+  banner:
+    location: classpath:META-INF/banner.txt
+
+application:
+  locale: en_US
+  csv:
+    ru_RU: questions_answers_ru_RU.csv
+    en_US: questions_answers_en_US.csv

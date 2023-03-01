@@ -1,10 +1,15 @@
 package com.otus.homework.service;
 
+import com.otus.homework.config.LocaleHolder;
 import com.otus.homework.domain.Answer;
 import com.otus.homework.domain.Question;
 import com.otus.homework.utils.FileResourcesUtils;
+import org.springframework.context.MessageSource;
+import org.springframework.core.io.Resource;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,18 +17,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class QuestionDao implements Parser {
-    private final String fileName;
-    private final String ERROR_MESSAGE_FILED_PARSE = "Failed to parse CSV file";
+    private final Resource resource;
+    private final MessageSource messageSource;
+    private final LocaleHolder localeHolder;
 
-    public QuestionDao(String fileName) {
-        this.fileName = fileName;
+    public QuestionDao(MessageSource messageSource, LocaleHolder localeHolder, Resource resource) {
+        this.resource = resource;
+        this.messageSource = messageSource;
+        this.localeHolder = localeHolder;
     }
 
     public List<Question> parse() {
         List<Question> questions = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                new FileResourcesUtils().getFileFromResourceAsStream(fileName), StandardCharsets.UTF_8)
+                new FileResourcesUtils(messageSource, localeHolder).getFileFromResourceAsStream(resource.getFilename()), StandardCharsets.UTF_8)
         )) {
             br.readLine();
 
@@ -42,7 +50,7 @@ public class QuestionDao implements Parser {
                 questions.add(new Question(question, answers, correctAnswerIndex));
             }
         } catch (IOException e) {
-            throw new RuntimeException(ERROR_MESSAGE_FILED_PARSE, e);
+            throw new RuntimeException(messageSource.getMessage("error.csv.parse.failed", null, localeHolder.getLocale()));
         }
 
         return questions;

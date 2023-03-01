@@ -1,9 +1,18 @@
 package com.otus.homework.utils;
 
-import java.io.*;
+import com.otus.homework.config.LocaleHolder;
+import org.springframework.context.MessageSource;
+
+import java.io.InputStream;
 
 public class FileResourcesUtils {
-    private static final String ERROR_MESSAGE_NOT_FOUND = "File not found! ";
+    private final MessageSource messageSource;
+    private final LocaleHolder localeHolder;
+
+    public FileResourcesUtils(MessageSource messageSource, LocaleHolder localeHolder) {
+        this.messageSource = messageSource;
+        this.localeHolder = localeHolder;
+    }
 
     // get a file from the resources folder
     // works everywhere, IDEA, unit test and JAR file.
@@ -12,7 +21,7 @@ public class FileResourcesUtils {
         InputStream inputStream = classLoader.getResourceAsStream(fileName);
 
         if (inputStream == null) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_NOT_FOUND + fileName);
+            throw new IllegalArgumentException(messageSource.getMessage("error.file.not.found", new String[]{fileName}, localeHolder.getLocale()));
         } else {
             return inputStream;
         }

@@ -1,0 +1,10 @@
+${AnsiBackground.BLUE}                                                              ,---.
+,--.   ,--.,------.,--.    ,-----. ,-----. ,--.   ,--.,------.|   |
+|  |   |  ||  .---'|  |   '  .--./'  .-.  '|   `.'   ||  .---'|  .'
+${AnsiBackground.YELLOW}|  |.'.|  ||  `--, |  |   |  |    |  | |  ||  |'.'|  ||  `--, |  |
+|   ,'.   ||  `---.|  '--.'  '--'\'  '-'  '|  |   |  ||  `---.`--'
+'--'   '--'`------'`-----' `-----' `-----' `--'   `--'`------'.--.
+                                                              '--'
+${AnsiBackground.DEFAULT}
+${AnsiColor.YELLOW} Spring Boot${spring-boot.formatted-version} ${AnsiColor.YELLOW}
+${AnsiColor.DEFAULT}
