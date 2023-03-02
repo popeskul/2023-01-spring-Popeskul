@@ -10,6 +10,10 @@ public class AppProps implements LocaleHolder, CsvHolder {
     private Locale locale;
     private Map<String, String> csv;
 
+    public AppProps() {
+        this.locale = Locale.getDefault();
+    }
+
     public Locale getLocale() {
         return locale;
     }
